@@ -2,36 +2,79 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quantor – EOQ Calculator</title>
-    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+    <title>Quantor â€” EOQ Calculator</title>
+    <meta name="description"
+          content="Quantor: a clean, neon-glow EOQ calculator for fast, reliable inventory decisions." />
+    <!-- cache-bust to ensure latest CSS loads -->
+    <link rel="stylesheet" href="style.css?v=3" />
+    <link rel="icon" type="image/png" href="assets/QuantorFavicon.png" />
 </head>
 <body>
+    <div class="container fade-in">
+        <!-- Theme Icon Toggle -->
+        <button id="theme-toggle" aria-label="Toggle theme">
+            <img id="theme-icon" src="assets/LightModeIcon.png" alt="Toggle Theme" />
+        </button>
 
-    <div class="container">
+        <!-- Logo (crisp). Glow is handled by CSS halo, not the image itself -->
+        <div class="logo-wrapper" aria-hidden="true">
+            <img src="assets/QuantorHeader.png" alt="Quantor Logo" class="logo" />
+        </div>
+
         <h1>Quantor</h1>
         <p class="tagline">Precision Inventory Intelligence</p>
 
-        <form id="eoq-form">
+        <!-- EOQ Form -->
+        <form id="eoq-form" novalidate>
             <label for="demand">Annual Demand (D)</label>
-            <input type="number" id="demand" required />
+            <input type="number"
+                   id="demand"
+                   required
+                   min="0.0001"
+                   step="any"
+                   inputmode="decimal"
+                   autocomplete="off" />
 
             <label for="orderCost">Order Cost per Order (S)</label>
-            <input type="number" id="orderCost" required />
+            <input type="number"
+                   id="orderCost"
+                   required
+                   min="0.0001"
+                   step="any"
+                   inputmode="decimal"
+                   autocomplete="off" />
 
             <label for="holdingCost">Holding Cost per Unit (H)</label>
-            <input type="number" id="holdingCost" required />
+            <input type="number"
+                   id="holdingCost"
+                   required
+                   min="0.0001"
+                   step="any"
+                   inputmode="decimal"
+                   autocomplete="off" />
 
-            <button type="submit">Calculate EOQ</button>
+            <button type="submit" id="calculate-button">Calculate EOQ</button>
+            <button type="button" id="reset-button">Reset</button>
         </form>
 
-        <div id="result">
+        <!-- Result Output -->
+        <div id="result"
+             role="region"
+             aria-live="polite"
+             aria-label="Calculation results">
             <h2>Results</h2>
             <p id="eoq-output"></p>
             <p id="total-cost-output"></p>
+            <h3 style="margin-top: 30px;">Calculation Data</h3>
         </div>
     </div>
 
     <script src="script.js"></script>
+
+    <footer class="footer">
+        <p>&copy; 2025 <span class="brand">Quantor</span> by NeonSigil</p>
+    </footer>
 </body>
 </html>
